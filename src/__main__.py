@@ -62,6 +62,12 @@ def _build_argparser() -> argparse.ArgumentParser:
         help="Output format (default: both).",
     )
     p.add_argument(
+        "--excel",
+        metavar="PATH",
+        default=None,
+        help="Write a multi-sheet .xlsx workbook to PATH in addition to the --format output.",
+    )
+    p.add_argument(
         "--top",
         type=int,
         default=3,
@@ -148,6 +154,13 @@ def main(argv: list[str] | None = None) -> int:
             print()
             print("=== JSON OUTPUT ===")
         print(render_json(j))
+
+    if args.excel:
+        from .excel_report import build_workbook
+        wb = build_workbook(prompt, est, pricing, kept, excluded, ranked, recs)
+        wb.save(args.excel)
+        print(f"\n=== EXCEL WORKBOOK ===\n  Wrote {args.excel}", file=sys.stderr)
+
     return 0
 
 

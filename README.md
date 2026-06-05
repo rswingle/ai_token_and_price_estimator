@@ -40,8 +40,9 @@ cat my_prompt.txt | .venv/bin/python -m src --format json
 | `--use-openrouter`           | Merge live USD prices from OpenRouter's public `/api/v1/models` (opt-in; falls back to baseline on any failure). |
 | `--no-cache`                 | Skip the on-disk cache; use the curated baseline directly.                                                       |
 | `--include-deprecated`       | Include deprecated models in the evaluation set.                                                                 |
-| `--format human\|json\|both` | Output format (default `both`).                                                                                  |
-| `--top N`                    | Number of recommendations to return (default 3).                                                                 |
+| `--format human\|json\|both` | Output format (default `both`).                                              |
+| `--excel PATH`             | Also write a multi-sheet `.xlsx` workbook to PATH (5 sheets: token estimate, recommendation, ranked pricing comparison, all providers, excluded). |
+| `--top N`                  | Number of recommendations to return (default 3).                             |
 | `--weight-cost X`            | Override cost weight (default 0.40).                                                                             |
 | `--weight-capability X`      | Override capability weight (default 0.30).                                                                       |
 | `--weight-context X`         | Override context-window weight (default 0.20).                                                                   |
