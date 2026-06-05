@@ -1,4 +1,4 @@
-# ai_token_nnd_price_estimator
+# ai_token_and_price_estimator
 
 Estimate token usage and rank **stateless API** LLM providers by cost for any AI project.
 
@@ -32,20 +32,20 @@ cat my_prompt.txt | .venv/bin/python -m src --format json
 
 ### Flags
 
-| Flag                       | Description                                                                  |
-|----------------------------|------------------------------------------------------------------------------|
-| `--target-output N`        | Override heuristic; supply an exact target output token count.               |
-| `--multiplier X`           | Override the output/input ratio (skips heuristic).                           |
-| `--refresh`                | Attempt a live scrape of provider marketing pages (short timeout, best-effort). |
-| `--use-openrouter`         | Merge live USD prices from OpenRouter's public `/api/v1/models` (opt-in; falls back to baseline on any failure). |
-| `--no-cache`               | Skip the on-disk cache; use the curated baseline directly.                   |
-| `--include-deprecated`     | Include deprecated models in the evaluation set.                             |
-| `--format human\|json\|both` | Output format (default `both`).                                              |
-| `--top N`                  | Number of recommendations to return (default 3).                             |
-| `--weight-cost X`          | Override cost weight (default 0.40).                                         |
-| `--weight-capability X`    | Override capability weight (default 0.30).                                    |
-| `--weight-context X`       | Override context-window weight (default 0.20).                               |
-| `--weight-latency X`       | Override latency weight (default 0.10).                                      |
+| Flag                         | Description                                                                                                      |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `--target-output N`          | Override heuristic; supply an exact target output token count.                                                   |
+| `--multiplier X`             | Override the output/input ratio (skips heuristic).                                                               |
+| `--refresh`                  | Attempt a live scrape of provider marketing pages (short timeout, best-effort).                                  |
+| `--use-openrouter`           | Merge live USD prices from OpenRouter's public `/api/v1/models` (opt-in; falls back to baseline on any failure). |
+| `--no-cache`                 | Skip the on-disk cache; use the curated baseline directly.                                                       |
+| `--include-deprecated`       | Include deprecated models in the evaluation set.                                                                 |
+| `--format human\|json\|both` | Output format (default `both`).                                                                                  |
+| `--top N`                    | Number of recommendations to return (default 3).                                                                 |
+| `--weight-cost X`            | Override cost weight (default 0.40).                                                                             |
+| `--weight-capability X`      | Override capability weight (default 0.30).                                                                       |
+| `--weight-context X`         | Override context-window weight (default 0.20).                                                                   |
+| `--weight-latency X`         | Override latency weight (default 0.10).                                                                          |
 
 ## Output
 
@@ -118,7 +118,7 @@ field is reported as `stale`. The tool never guesses pricing values.
 Token estimation uses a 5-class classifier and task-specific multipliers:
 
 | Task kind | Multiplier range | Reasoning buffer |
-|-----------|------------------|------------------|
+| --------- | ---------------- | ---------------- |
 | Q&A       | 0.5x – 1.0x      | 10%              |
 | Analysis  | 1.0x – 2.0x      | 20%              |
 | General   | 1.0x – 2.0x      | 20%              |
