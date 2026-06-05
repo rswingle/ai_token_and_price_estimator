@@ -1,0 +1,4 @@
+tiktoken>=0.7.0
+requests>=2.32.0
+beautifulsoup4>=4.12.0
+trafilatura>=2.0.0
