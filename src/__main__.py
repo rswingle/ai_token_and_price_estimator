@@ -68,6 +68,12 @@ def _build_argparser() -> argparse.ArgumentParser:
         help="Write a multi-sheet .xlsx workbook to PATH in addition to the --format output.",
     )
     p.add_argument(
+        "--csv",
+        metavar="PATH",
+        default=None,
+        help="Write a CSV summary of all sections to PATH in addition to the --format output.",
+    )
+    p.add_argument(
         "--top",
         type=int,
         default=3,
@@ -160,6 +166,13 @@ def main(argv: list[str] | None = None) -> int:
         wb = build_workbook(prompt, est, pricing, kept, excluded, ranked, recs)
         wb.save(args.excel)
         print(f"\n=== EXCEL WORKBOOK ===\n  Wrote {args.excel}", file=sys.stderr)
+
+    if args.csv:
+        from .csv_report import build_csv
+        text = build_csv(prompt, est, pricing, kept, excluded, ranked, recs)
+        with open(args.csv, "w", encoding="utf-8", newline="") as f:
+            f.write(text)
+        print(f"\n=== CSV FILE ===\n  Wrote {args.csv}", file=sys.stderr)
 
     return 0
 

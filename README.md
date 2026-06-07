@@ -42,6 +42,7 @@ cat my_prompt.txt | .venv/bin/python -m src --format json
 | `--include-deprecated`       | Include deprecated models in the evaluation set.                                                                 |
 | `--format human\|json\|both` | Output format (default `both`).                                              |
 | `--excel PATH`             | Also write a multi-sheet `.xlsx` workbook to PATH (5 sheets: token estimate, recommendation, ranked pricing comparison, all providers, excluded). |
+| `--csv PATH`               | Also write a single CSV file to PATH with a `section` column covering all 5 sections (token_estimate, recommendation, pricing, providers, excluded). |
 | `--top N`                  | Number of recommendations to return (default 3).                             |
 | `--weight-cost X`            | Override cost weight (default 0.40).                                                                             |
 | `--weight-capability X`      | Override capability weight (default 0.30).                                                                       |
